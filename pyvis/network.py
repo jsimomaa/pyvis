@@ -7,7 +7,6 @@ from collections import defaultdict
 
 import jsonpickle
 import networkx as nx
-from IPython.display import IFrame
 from jinja2 import Environment, FileSystemLoader
 
 from .edge import Edge
@@ -547,6 +546,8 @@ class Network(object):
         else:
             self.write_html(name, open_browser=True)
         if notebook:
+            # We can import IFrame ondemand to make headless apps with PyInstaller to reduce file size & dependencies
+            from IPython.display import IFrame
             return IFrame(name, width=self.width, height=self.height)
 
     def prep_notebook(self,
